@@ -1,14 +1,16 @@
 import { useState, useRef } from "react";
-import { GraphPanel, ControlPanel } from "./components";
+import { VisJsGraphPanel, D3GraphPanel, ControlPanel } from "./components";
 
 const DEFAULT_NUMBER_OF_NODES = 10;
 const DEFAULT_NUMBER_OF_LINKS = 8;
+const DEFAULT_LIB = "visjs";
 
 function App() {
   const optionsRef = useRef(null);
   const [settings, setSettings] = useState({
     numOfNodes: DEFAULT_NUMBER_OF_NODES,
     numOfLinks: DEFAULT_NUMBER_OF_LINKS,
+    lib: DEFAULT_LIB,
   });
   const [drawStartTime, setDrawStartTime] = useState(0);
   const [stabStartTime, setStabStartTime] = useState(0);
@@ -22,14 +24,24 @@ function App() {
   return (
     <div className="flex flex-row">
       <div className="basis-3/4">
-        <GraphPanel
-          settings={settings}
-          optionsRef={optionsRef}
-          onStartDrawing={(value) => setDrawStartTime(value)}
-          onEndDrawing={(value) => setDrawEndTime(value)}
-          onStartStab={(value) => setStabStartTime(value)}
-          onEndStab={(value) => setStabEndTime(value)}
-        />
+        {settings.lib === "visjs" ? (
+          <VisJsGraphPanel
+            settings={settings}
+            optionsRef={optionsRef}
+            onStartDrawing={(value) => setDrawStartTime(value)}
+            onEndDrawing={(value) => setDrawEndTime(value)}
+            onStartStab={(value) => setStabStartTime(value)}
+            onEndStab={(value) => setStabEndTime(value)}
+          />
+        ) : (
+          <D3GraphPanel
+            settings={settings}
+            onStartDrawing={(value) => setDrawStartTime(value)}
+            onEndDrawing={(value) => setDrawEndTime(value)}
+            onStartStab={(value) => setStabStartTime(value)}
+            onEndStab={(value) => setStabEndTime(value)}
+          />
+        )}
       </div>
       <div className="basis-1/4">
         <ControlPanel

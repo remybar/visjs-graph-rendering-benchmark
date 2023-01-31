@@ -1,2 +1,3 @@
 export * from "./ControlPanel";
-export * from "./GraphPanel";
+export * from "./VisJsGraphPanel";
+export * from "./D3GraphPanel";

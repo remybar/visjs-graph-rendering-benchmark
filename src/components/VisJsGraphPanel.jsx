@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Network } from "vis-network";
 
-export const GraphPanel = ({
+export const VisJsGraphPanel = ({
   settings,
   optionsRef,
   onStartDrawing,
@@ -119,6 +119,7 @@ export const GraphPanel = ({
     });
   };
 
+  // eslint-disable-next-line
   useEffect(buildGraph, [graphRef, settings]);
 
   return <div ref={graphRef} className="h-screen w-full"></div>;

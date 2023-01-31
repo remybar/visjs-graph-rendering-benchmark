@@ -9,6 +9,7 @@ export const ControlPanel = ({
   drawTime,
   stabTime,
 }) => {
+  const [selectedLib, setSelectedLib] = useState("visjs");
   const [numOfNodes, setNumOfNodes] = useState(settings.numOfNodes);
   const [numOfLinks, setNumOfLinks] = useState(settings.numOfLinks);
   const [collapsed, setCollapsed] = useState(false);
@@ -25,6 +26,7 @@ export const ControlPanel = ({
     onSettingsChanged({
       numOfNodes: parseInt(numOfNodes),
       numOfLinks: parseInt(numOfLinks),
+      lib: selectedLib,
     });
   };
 
@@ -35,6 +37,33 @@ export const ControlPanel = ({
       <h2 className="font-bold text-lg mb-2 bg-gray-600 px-2 text-white">
         Controls
       </h2>
+      <div className="flex flex-col my-2">
+        <label className="font-semibold text-sm py-1">Library</label>
+        <div
+          className="flex flex-row justify-evenly"
+          onChange={(e) => setSelectedLib(e.target.value)}>
+          <div className="flex flex-row px-4 space-x-4">
+            <input
+              type="radio"
+              id="visjs"
+              name="visjs"
+              value="visjs"
+              checked={selectedLib === "visjs"}
+            />
+            <label>visjs</label>
+          </div>
+          <div className="flex flex-row px-4 space-x-4">
+            <input
+              type="radio"
+              id="d3"
+              name="d3"
+              value="d3"
+              checked={selectedLib === "d3"}
+            />
+            <label>d3</label>
+          </div>
+        </div>
+      </div>
       <div className="flex flex-col my-2">
         <label className="font-semibold text-sm py-1">Number of nodes</label>
         <input
